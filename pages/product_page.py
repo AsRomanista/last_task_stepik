@@ -36,3 +36,10 @@ class ProductPage(BasePage):
         answer = str(math.log(abs((12 * math.sin(float(x))))))  # Вычисляем ответ
         alert.send_keys(answer)
         alert.accept()
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*self.SUCCESS_MESSAGE), "Success message is presented, but should not be"
+
+    def should_message_disappear_after_adding_product_to_basket(self):
+        assert self.is_disappeared(*self.SUCCESS_MESSAGE), "Success message is still presented, but should disappear"
+
