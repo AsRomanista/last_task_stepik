@@ -1,22 +1,21 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class LoginPage(BasePage):
-    def should_be_login_page(self):
-        self.should_be_login_url()
-        self.should_be_login_form()
-        self.should_be_register_form()
+    def register_new_user(self, email, password):
+        WebDriverWait(self.browser, 10).until(
+            EC.presence_of_element_located(LoginPageLocators.REGISTRATION_EMAIL_INPUT)
+        )
 
-    def should_be_login_url(self):
-        # реализуйте проверку на корректный url адрес
-        url = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
-        assert "login" in self.url, "This isn't url page"
+        email_input = self.browser.find_element(*LoginPageLocators.REGISTRATION_EMAIL_INPUT)
+        password_input = self.browser.find_element(*LoginPageLocators.REGISTRATION_PASSWORD_INPUT)
+        password_confirmation_input = self.browser.find_element(*LoginPageLocators.REGISTRATION_CONFIRM_PASSWORD_INPUT)
+        register_button = self.browser.find_element(*LoginPageLocators.REGISTRATION_SUBMIT_BUTTON)
 
-    def should_be_login_form(self):
-        # реализуйте проверку, что есть форма логина
-        assert self.is_element_present(*LoginPageLocators.LOGIN_BUTTON), "This isn't login_button"
-
-    def should_be_register_form(self):
-        # реализуйте проверку, что есть форма регистрации на странице
-        assert self.is_element_present(*LoginPageLocators.REGISTER_BUTTON), "This isn't register_button"
+        email_input.send_keys(email)
+        password_input.send_keys(password)
+        password_confirmation_input.send_keys(password)
+        register_button.click()
