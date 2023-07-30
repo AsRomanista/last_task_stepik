@@ -21,7 +21,10 @@ class BasketPageLocators():
     EMPTY_BASKET_MESSAGE = (By.CSS_SELECTOR, "#content_inner > p")
 
 class LoginPageLocators():
-    REGISTRATION_EMAIL_INPUT = (By.CSS_SELECTOR, "#id_registration-email")
-    REGISTRATION_PASSWORD_INPUT = (By.CSS_SELECTOR, "#id_registration-password1")
-    REGISTRATION_CONFIRM_PASSWORD_INPUT = (By.CSS_SELECTOR, "#id_registration-password2")
-    REGISTRATION_SUBMIT_BUTTON = (By.NAME, "registration_submit")
+    LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
+    REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+    EMAIL_INPUT = (By.CSS_SELECTOR, "#id_registration-email")
+    PASSWORD_INPUT = (By.CSS_SELECTOR, "#id_registration-password1")
+    PASSWORD_CONFIRM_INPUT = (By.CSS_SELECTOR, "#id_registration-password2")
+    REGISTER_BUTTON = (By.XPATH, "//button[@name='registration_submit']")
+    SIGN_ICON = (By.CSS_SELECTOR, ".icon-ok-sign")

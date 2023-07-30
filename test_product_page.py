@@ -86,18 +86,13 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
-        # Инициализируем LoginPage
-        login_page = LoginPage(browser, "http://selenium1py.pythonanywhere.com/accounts/login/")
-        # Открываем страницу регистрации
-        login_page.open()
-        # Генерируем уникальный email для каждого пользователя на основе текущего времени
+        link = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+        page = LoginPage(browser, link)
+        page.open()
         email = str(time.time()) + "@fakemail.org"
         password = str(time.time()) + "12345"
-        browser.implicitly_wait(10)
-        # Регистрируем нового пользователя
-        login_page.register_new_user(email, password)
-        # Проверяем, что пользователь залогинен
-        login_page.should_be_authorized_user()
+        page.register_new_user(email, password)
+        page.should_be_authorized_user()
 
     @pytest.mark.need_review
     @pytest.mark.xfail(reason="Bug found, issue reported")
